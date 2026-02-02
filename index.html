@@ -48,7 +48,7 @@ button {
   color: white;
 }
 
-/* NO button starts normal inside card */
+/* NO button starts normal */
 #noBtn {
   background-color: #ccc;
   position: relative;
@@ -90,7 +90,6 @@ button {
 const noBtn = document.getElementById("noBtn");
 let escaped = false;
 
-// Texts to rotate on click
 const noTexts = [
   "Are you sure? 😏",
   "Really sure? 🥺",
@@ -103,20 +102,25 @@ const noTexts = [
 
 let textIndex = 0;
 
-// When mouse goes near NO, it escapes the card
+function changeText() {
+  noBtn.innerText = noTexts[textIndex];
+  textIndex = (textIndex + 1) % noTexts.length;
+}
+
+// Escape + change text on hover
 noBtn.addEventListener("mouseover", () => {
   if (!escaped) {
     escaped = true;
     noBtn.style.position = "fixed";
   }
+  changeText();
   moveNo();
 });
 
-// On click → move + change text
+// Escape + change text on click
 noBtn.addEventListener("click", () => {
+  changeText();
   moveNo();
-  noBtn.innerText = noTexts[textIndex];
-  textIndex = (textIndex + 1) % noTexts.length;
 });
 
 function moveNo() {
