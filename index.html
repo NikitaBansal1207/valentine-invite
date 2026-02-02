@@ -46,11 +46,7 @@ button {
 
 #noBtn {
   background-color: #ccc;
-  position: fixed; /* instead of absolute */
-  top: 50%;         /* start in the middle */
-  left: 70%;        /* start near the right side */
-  transform: translate(-50%, -50%);
-  z-index: 3;       /* always on top */
+  position: absolute;
 }
 
 /* Floating hearts */
@@ -78,17 +74,16 @@ button {
   <h1>Aditya 💖</h1>
   <h2>Will you be my Valentine?</h2>
   <button id="yesBtn" onclick="goYes()">Yes ❤️</button>
-  <button id="noBtn">No 🙅‍♂️</button>
 </div>
 
-
+<button id="noBtn">No 🙅‍♂️</button>
 
 <script>
 const noBtn = document.getElementById("noBtn");
 
 function moveNo() {
-  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 50);
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 }
@@ -114,5 +109,3 @@ function goYes() {
 
 </body>
 </html>
-
-
