@@ -30,6 +30,10 @@ h1 {
   color: #ff4b5c;
 }
 
+.buttons {
+  margin-top: 20px;
+}
+
 button {
   padding: 15px 30px;
   font-size: 18px;
@@ -44,9 +48,11 @@ button {
   color: white;
 }
 
+/* NO button starts normal */
 #noBtn {
   background-color: #ccc;
-  position: absolute;
+  position: relative;
+  z-index: 3;
 }
 
 /* Floating hearts */
@@ -73,23 +79,34 @@ button {
 <div class="card">
   <h1>Aditya 💖</h1>
   <h2>Will you be my Valentine?</h2>
-  <button id="yesBtn" onclick="goYes()">Yes ❤️</button>
-  <button id="noBtn">No 🙅‍♂️</button>
-</div>
 
+  <div class="buttons">
+    <button id="yesBtn" onclick="goYes()">Yes ❤️</button>
+    <button id="noBtn">No 🙅‍♂️</button>
+  </div>
+</div>
 
 <script>
 const noBtn = document.getElementById("noBtn");
+let escaped = false;
+
+// When mouse goes near NO, it escapes from the card
+noBtn.addEventListener("mouseover", () => {
+  if (!escaped) {
+    escaped = true;
+    noBtn.style.position = "fixed";
+  }
+  moveNo();
+});
+
+noBtn.addEventListener("click", moveNo);
 
 function moveNo() {
-  const x = Math.random() * (window.innerWidth - 100);
-  const y = Math.random() * (window.innerHeight - 50);
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 }
-
-noBtn.addEventListener("mouseover", moveNo);
-noBtn.addEventListener("click", moveNo);
 
 // Floating hearts
 setInterval(() => {
@@ -109,4 +126,3 @@ function goYes() {
 
 </body>
 </html>
-
